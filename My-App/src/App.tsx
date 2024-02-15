@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Toaster } from "react-hot-toast";
+
 
 import Register from "./pages/Register";
 

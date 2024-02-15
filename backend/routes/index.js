@@ -5,8 +5,6 @@ const Register = require("../utils/db");
 router.post("/register", async (req, res) => {
   try {
     const { name, email, age } = req.body;
-    console.log({ name, email, age });
-
     // Create a new register document
     const register = new Register({ name, email, age });
 
