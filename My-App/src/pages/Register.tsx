@@ -1,6 +1,12 @@
-import { useState } from "react";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
+import {
+	buttonClass,
+	containerClass,
+	InputClass,
+	TextClass,
+	TitleClass,
+} from "../assets/Styles";
 
 export default function Register() {
 	const handleSubmit = () => {
@@ -19,7 +25,7 @@ export default function Register() {
 			!email.includes("@") ||
 			!email.includes(".")
 		) {
-			return;
+			toast.error("Invalid Input");
 		} else {
 			axios
 				.post("http://localhost:8000/register", {
@@ -29,27 +35,39 @@ export default function Register() {
 				})
 				.then(() => {
 					toast.success("Successfully Registered!");
+				})
+				.catch(() => {
+					toast.error("Register failed");
 				});
 		}
 	};
 	return (
-		<form className=" flex flex-col gap-3">
+		<div className="flex h-full w-full flex-col items-center justify-center bg-gray-900 ">
 			<Toaster />
-			<div className=" flex flex-col gap-3">
-				<label htmlFor="name" className="text-red">
-					Name
-				</label>
-				<input type="text" id="name" />
-			</div>
-			<div className=" flex flex-col gap-3">
-				<label htmlFor="email">Email</label>
-				<input type="email" id="email" />
-			</div>
-			<div className=" flex flex-col gap-3">
-				<label htmlFor="age">Age</label>
-				<input type="number" id="age" />
-			</div>
-			<button onClick={handleSubmit}>Submit</button>
-		</form>
+			<form className={containerClass}>
+				<h1 className={TitleClass}>Register</h1>
+				<div className=" flex flex-col gap-2">
+					<label htmlFor="name" className={TextClass}>
+						Name
+					</label>
+					<input type="text" id="name" className={InputClass} />
+				</div>
+				<div className=" flex flex-col gap-2">
+					<label htmlFor="email" className={TextClass}>
+						Email
+					</label>
+					<input type="email" id="email" className={InputClass} />
+				</div>
+				<div className=" flex flex-col gap-2">
+					<label htmlFor="age" className={TextClass}>
+						Age
+					</label>
+					<input type="number" id="age" className={InputClass} />
+				</div>
+				<button onClick={handleSubmit} className={buttonClass}>
+					Submit
+				</button>
+			</form>
+		</div>
 	);
 }
